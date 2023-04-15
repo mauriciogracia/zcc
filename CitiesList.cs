@@ -1,3 +1,5 @@
+using System.Xml.Linq;
+using ZipCodeCalculation;
 /// <summary>
 /// Represents the list of city, that is loaded and used for calculations
 /// </summary>
@@ -82,6 +84,38 @@ public class CitiesList {
         return city ;
     }
 
+    public City GetCityByZipCode(string zipCode)
+    {
+        City ?c = cities.FirstOrDefault(c => c.zipCode.Equals(zipCode));
+
+        return c;
+    }
+
+    public string CalculateDistance(string zipOrig, string zipDest)
+    {
+        string resp = "One of the zipcode does not exist in ZipCodes.csv";
+        City ?city1;
+        City ?city2;
+
+        city1 = GetCityByZipCode(zipOrig);
+
+        if(city1 != null)
+        {
+            city2 = GetCityByZipCode(zipDest);
+
+            if (city2 != null)
+            {
+                //Calculate distance in MILES
+                var d = DistanceCalculator.CalculateInMiles(city1.latitude, city2.latitude, city1.longitude, city2.longitude);
+
+                //The distance between Anaheim (92801) to Huntington Beach (92649) is 10.307 miles
+                resp = String.Format("The distance between {0} ({1}) to {2} ({3}) is {4}", city1.name, zipOrig, city2.name, zipDest, d);
+            }
+        }
+
+        return resp;
+    }
+
     /// <summary>
     /// Shows the information of the loaded cities on the console
     /// </summary>
@@ -93,4 +127,6 @@ public class CitiesList {
         }
         Console.WriteLine(String.Format("# of cities:{0}", cities.Count)) ;
     }
+
+
 }
