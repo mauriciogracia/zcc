@@ -54,7 +54,7 @@ public class CitiesList {
         {
             string[] parts = line.Split(',');
 
-            if (parts.Length == 4)
+            if (parts.Length >= 4)
             {
                 city = new City
                 {
@@ -63,6 +63,19 @@ public class CitiesList {
                     longitude = Double.Parse(parts[2]),
                     name = parts[3]
                 };
+
+                //Some city names have "," on its name we need to concatenate that into a single city name
+                if (parts.Length > 4)
+                {
+                    for (int i = 4; i < parts.Length; i++)
+                    {
+                        city.name += parts[i];
+                    }
+                }
+            }
+            else
+            {
+                Console.Error.WriteLine(String.Format("wrong city data: {0}", line));
             }
         }
 
@@ -78,5 +91,6 @@ public class CitiesList {
         {
             Console.WriteLine(c);
         }
+        Console.WriteLine(String.Format("# of cities:{0}", cities.Count)) ;
     }
 }
