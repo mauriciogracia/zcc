@@ -84,13 +84,19 @@ public class CitiesList {
         return city ;
     }
 
-    public City GetCityByZipCode(string zipCode)
+    public City? GetCityByZipCode(string zipCode)
     {
         City ?c = cities.FirstOrDefault(c => c.zipCode.Equals(zipCode));
 
         return c;
     }
 
+    /// <summary>
+    /// Calculate the distance in miles between two zip codes 
+    /// </summary>
+    /// <param name="zipOrig"></param>
+    /// <param name="zipDest"></param>
+    /// <returns></returns>
     public string CalculateDistance(string zipOrig, string zipDest)
     {
         string resp = "One of the zipcode does not exist in ZipCodes.csv";
