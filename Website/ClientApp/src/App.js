@@ -12,7 +12,7 @@ export default class App extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log('form sent');
+        console.log('The Console app calculation logic should be a WEB API to be consumed here');
     }
 
     render() {
