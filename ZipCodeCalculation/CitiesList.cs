@@ -8,7 +8,7 @@ using ZipCodeCalculation;
 /// Represents the list of city, that is loaded and used for calculations
 /// </summary>
 public class CitiesList {
-    public IMongoCollection<City> ?Cities { get; set; }
+    public IMongoCollection<City> Cities { get; set; }
     MongoClient client = new MongoClient("mongodb://localhost:27017");
 
     /// <summary>
@@ -30,12 +30,12 @@ public class CitiesList {
                 using (StreamReader reader = new StreamReader(fileStream))
                 {
                     //Read the header and ignore it
-                    string? line = reader.ReadLine();
+                    string line = reader.ReadLine();
 
                     while (line != null)
                     {
                         line = reader.ReadLine();
-                        City? city = parseLine(line);
+                        City city = ParseLine(line);
 
                         if (city != null)
                         {
@@ -60,8 +60,8 @@ public class CitiesList {
     /// </summary>
     /// <param name="line">The line read</param>
     /// <returns></returns>
-    private City? parseLine(string ?line) {
-        City? city = null;
+    private City ParseLine(string line) {
+        City city = null;
 
         if (line != null)
         {
@@ -100,10 +100,10 @@ public class CitiesList {
     /// </summary>
     /// <param name="zipCode"></param>
     /// <returns></returns>
-    public City? GetCityByZipCode(string zipCode)
+    public City GetCityByZipCode(string zipCode)
     {
         var filter = Builders<City>.Filter.Eq("zipCode", zipCode);
-        City? c = this.Cities.Find(filter).FirstOrDefault();
+        City c = this.Cities.Find(filter).FirstOrDefault();
 
         return c;
     }
@@ -117,8 +117,8 @@ public class CitiesList {
     public string CalculateDistance(string zipOrig, string zipDest)
     {
         string resp = "One of the zipcode does not exist in ZipCodes.csv";
-        City ?city1;
-        City ?city2;
+        City city1;
+        City city2;
 
         city1 = GetCityByZipCode(zipOrig);
 

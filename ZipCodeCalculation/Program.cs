@@ -12,9 +12,9 @@ namespace CoreConsole
             cities.populateMongoDB("./data/ZipCodes.csv");
             Console.WriteLine("City DB ready");
 
-            string? zipOrigin;
-            string? zipDestination;
-            string? continueCalc;
+            string zipOrigin;
+            string zipDestination;
+            string continueCalc;
 
             do
             {
@@ -33,8 +33,8 @@ namespace CoreConsole
 
         static string ReadZipCode(string message)
         {
-            string? zip;
             long n;
+            string zip;
 
             do
             {
