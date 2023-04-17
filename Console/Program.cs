@@ -20,7 +20,7 @@ do
 
 
     Console.WriteLine(cities.CalculateDistance(zipOrigin, zipDestination));
-    Console.WriteLine("Continue ?");
+    Console.WriteLine("Continue (y/n)?");
     continueCalc = Console.ReadLine();
 } while (!string.IsNullOrEmpty(continueCalc) && continueCalc.ToUpper().Equals("Y"));
 
