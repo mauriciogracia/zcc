@@ -14,8 +14,21 @@ namespace WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: "UltraOpenJustForDevelopment",
+                    builder =>
+                    {
+                        //This is how you tell your app to allow cors
+                        builder.WithOrigins("*")
+                                .WithMethods("POST", "DELETE", "GET")
+                                .AllowAnyHeader();
+                    });
+            });
+
             var app = builder.Build();
 
+            app.UseCors("UltraOpenJustForDevelopment");
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
