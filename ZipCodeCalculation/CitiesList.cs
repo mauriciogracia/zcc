@@ -1,5 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
+using System.IO;
 using System.Xml.Linq;
 using ZipCodeCalculation;
 /// <summary>
@@ -23,7 +25,7 @@ public class CitiesList {
             this.Cities = database.GetCollection<City>("Cities");
 
             //If the collection is empty populate it with the CSV file
-            if (this.Cities.AsQueryable().Count() == 0) {
+            if (!this.Cities.AsQueryable().Any()) {
                 FileStream fileStream = new FileStream(path, FileMode.Open);
                 using (StreamReader reader = new StreamReader(fileStream))
                 {
@@ -86,7 +88,7 @@ public class CitiesList {
             }
             else
             {
-                Console.Error.WriteLine(String.Format("wrong city data: {0}", line));
+                Console.Error.WriteLine(string.Format("wrong city data: {0}", line));
             }
         }
 

@@ -7,7 +7,7 @@ using System.Text;
 /// </summary>
 public class City {
     [BsonId]
-    public string zipCode = String.Empty ;
+    public string zipCode = string.Empty ;
     
     [BsonElement("latitude")]
     public double latitude ;
@@ -16,7 +16,7 @@ public class City {
     public double longitude ;
 
     [BsonElement("name")]
-    public string name = String.Empty;
+    public string name = string.Empty;
 
 
     /// <summary>
