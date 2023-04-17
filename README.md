@@ -2,51 +2,63 @@
 
 ## Architecture Diagram
 
-<img src="Architecture.jpg" alt="ZipCodeCalculation arquitecture diagram" style="height: 200px"/>
+<img src="assets/Architecture.png" alt="ZipCodeCalculation arquitecture diagram" style="height: 300px"/>
 
-This solution has two projects:
+This solution has four projects:
 
-**ZipCodeCalculation** is a `C#` Console application that reads the `ZipCodes.csv` and stores the data into a `MongoDB docker` image in a database called `cities-mdb`
+1. `ZipCodeCode` is a library with the logic to perform the zipcode distance calculation, is implemented in .NET Core 2.0 so
+   that it can be used from .NET Core and .NET Framework.
 
-**WebSite** is a ASP.NET + react website, currently is just a form to input the zipcodes but is not using the logic from `ZipCodeCalculation`
+    This project takes care of loadingZipCodeCode the CSV file and storing it in a collection on a MongoDB that is inside a docker instance
+
+2. `ZipCodeCalculation/Console` is a `C#` Console application that uses the `ZipCodeCode` library to read the two zipcodes and shows the distance
+
+3. `WebAPI` is a REST api, that uses the `ZipCodeCode` library to provide a GET method that returns a JSON with the calculation results
+
+4. `WebSite` is a ASP.NET + react website with a form to input the zipcodes, that calls the `WebAPI`, and shows the calculation results
 
 ## Requirements
 
-### Console
-
--   .NET CORE 3.1 Runtime
--   Docker
-
-### Website
-
--   .NET 6.0 Runtime
--   React
+Use the above diagram to determin the runtime versions that you need
 
 ## Environment Setup
 
 To prepare the Docker image Run these commands from a commandline (CMD, Powershell, dont use gitbash since step 3 will fail)
 
+1. Make sure the docker dameon is running (Windows run `Docker Desktop`, Linux run `dockerd`)
 1. `docker pull mongo`
-2. `docker run -d -p 27017:27017 --name cities-mdb mongo`
-3. `docker exec -it cities-mdb /bin/bash`
-4. `mongosh`
-5. `use clients-db`
-6. `db.createCollection('Cities')`
+1. `docker run -d -p 27017:27017 --name cities-mdb mongo`
+1. `docker exec -it cities-mdb /bin/bash`
+1. `mongosh`
+1. `use clients-db`
+1. `db.createCollection('Cities')`
+
+## How to run All At Once
+
+If you open the ZipCodeCalulation.sln in Visual Studio, you can just click on START button this will launch these projects in order
+
+-   Console
+-   WebApi
+-   WebSite
 
 ## How to run Console application
 
-1. Go to the `zcc/ZipCodeCalculation`
+1. Make sure the docker instance created above is still running
+1. Go to the `zcc/Console`
 1. `dotnet build`
 1. `dotnet run`
    <br />
 
     Running the console application look like this <br />
-    <img src="ConsoleSS.png" alt="ZipCodeCalculation console output" style="height: 200px"/><br />
+    <img src="assets/ConsoleSS.png" alt="ZipCodeCalculation console output" style="height: 200px"/><br />
     When the calculation is done you can try another one by pressing `y`
 
     The zipcode is validated to check for empty and non numeric values, <br />
-    <img src="ConsoleSS_02.png" alt="ZipCode validation" style="height: 200px"/>
+    <img src="assets/ConsoleSS_02.png" alt="ZipCode validation" style="height: 200px"/>
 
-## How to run Website (react asp.net)
+## How to run Website
 
-    - React + Netversion
+1. Run the `WebAPI` project (dotnet build, dotnet run on the WebAPI folder)
+2. Run the `React` web site (from Visual Studio or using the command line)
+
+<img src="assets/WebSite.png" alt="ZipCodeCalculation arquitecture diagram" style="height: 200px"/>
