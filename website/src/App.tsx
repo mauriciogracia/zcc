@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+
+function handleSubmit(e:any) {
+    e.preventDefault();
+    console.log('The Console app calculation logic should be a WEB API to be consumed here');
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+          <form onSubmit={handleSubmit}>
+              <label>
+                  Zip From:
+                  <input type="text" name="zipFrom" />
+              </label><br />
+              <label>
+                  Zip Destination:
+                  <input type="text" name="zipDest" />
+              </label><br />
+              <input type="submit" value="Submit" />
+          </form>
     </div>
   );
 }
