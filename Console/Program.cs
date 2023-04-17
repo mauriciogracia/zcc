@@ -8,7 +8,7 @@ namespace CoreConsole
         {
             CitiesList cities = new CitiesList();
 
-            Console.WriteLine("Connecting to Docker mongoDB");
+            Console.WriteLine("Connecting to Docker mongoDB...");
             cities.populateMongoDB("./data/ZipCodes.csv");
             Console.WriteLine("City DB ready");
 

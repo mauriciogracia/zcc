@@ -26,15 +26,18 @@ This solution has two projects:
 
 To prepare the Docker image Run these commands from a commandline (CMD, Powershell, dont use gitbash since step 3 will fail)
 
+1. Make sure the docker dameon is running (Windows run `Docker Desktop`, Linux run `dockerd`)
 1. `docker pull mongo`
-2. `docker run -d -p 27017:27017 --name cities-mdb mongo`
-3. `docker exec -it cities-mdb /bin/bash`
-4. `mongosh`
-5. `use clients-db`
-6. `db.createCollection('Cities')`
+1. `docker run -d -p 27017:27017 --name cities-mdb mongo`
+1. `docker exec -it cities-mdb /bin/bash`
+1. `mongosh`
+1. `use clients-db`
+1. `db.createCollection('Cities')`
 
 ## How to run Console application
 
+
+1. Make sure the docker instance created above is still running
 1. Go to the `zcc/ZipCodeCalculation`
 1. `dotnet build`
 1. `dotnet run`

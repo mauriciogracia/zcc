@@ -6,13 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.19.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="data\ZipCodes.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\ZipCodeCore\ZipCodeCore.csproj" />
   </ItemGroup>
 
 </Project>
