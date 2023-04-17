@@ -19,7 +19,7 @@ This solution has four projects:
 
 ## Requirements
 
-Use the above diagram to determin the runtime versions that you need
+Use the above diagram to determine the framework and runtime versions that you need for each project
 
 ## Environment Setup
 
