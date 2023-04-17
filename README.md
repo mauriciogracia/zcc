@@ -58,7 +58,7 @@ If you open the ZipCodeCalulation.sln in Visual Studio, you can just click on ST
 
 ## How to run Website
 
-1. Run the `WebAPI` project (dotnet build, dotnet run on the WebAPI folder)
+1. Run the `WebAPI` project (`dotnet build`, `dotnet run` on the zcc/WebAPI folder)
 2. Run the `React` web site (from Visual Studio or using the command line)
 
 <img src="assets/WebSite.png" alt="ZipCodeCalculation arquitecture diagram" style="height: 200px"/>
