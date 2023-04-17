@@ -1,35 +1,44 @@
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System.Xml.Linq;
 using ZipCodeCalculation;
 /// <summary>
 /// Represents the list of city, that is loaded and used for calculations
 /// </summary>
 public class CitiesList {
-    private List<City> cities = new List<City>();
+    public IMongoCollection<City> ?Cities { get; set; }
+    MongoClient client = new MongoClient("mongodb://localhost:27017");
 
     /// <summary>
     /// Load the CSV into a list of cities
     /// </summary>
     /// <param name="path">Path to the CSV file</param>
     /// <returns></returns>
-    public bool load(string path) {
+    public bool populateMongoDB(string path) {
         bool success = false;
 
         try
         {
-            FileStream fileStream = new FileStream(path, FileMode.Open);
-            using (StreamReader reader = new StreamReader(fileStream))
-            {
-                //Read the header and ignore it
-                string ?line = reader.ReadLine();
+            var database = client.GetDatabase("GeeksArrayStore");
+            this.Cities = database.GetCollection<City>("Cities");
 
-                while (line != null)
+            //If the collection is empty populate it with the CSV file
+            if (this.Cities.AsQueryable().Count() == 0) {
+                FileStream fileStream = new FileStream(path, FileMode.Open);
+                using (StreamReader reader = new StreamReader(fileStream))
                 {
-                    line = reader.ReadLine();
-                    City? city = parseLine(line);
+                    //Read the header and ignore it
+                    string? line = reader.ReadLine();
 
-                    if (city != null)
+                    while (line != null)
                     {
-                        cities.Add(city);
+                        line = reader.ReadLine();
+                        City? city = parseLine(line);
+
+                        if (city != null)
+                        {
+                            Cities.InsertOne(city);
+                        }
                     }
                 }
             }
@@ -84,9 +93,15 @@ public class CitiesList {
         return city ;
     }
 
+    /// <summary>
+    /// Find the City in the cities collection by zipcode
+    /// </summary>
+    /// <param name="zipCode"></param>
+    /// <returns></returns>
     public City? GetCityByZipCode(string zipCode)
     {
-        City ?c = cities.FirstOrDefault(c => c.zipCode.Equals(zipCode));
+        var filter = Builders<City>.Filter.Eq("zipCode", zipCode);
+        City? c = this.Cities.Find(filter).FirstOrDefault();
 
         return c;
     }
@@ -122,17 +137,6 @@ public class CitiesList {
         return resp;
     }
 
-    /// <summary>
-    /// Shows the information of the loaded cities on the console
-    /// </summary>
-    public void show()
-    {
-        foreach (City c in cities)
-        {
-            Console.WriteLine(c);
-        }
-        Console.WriteLine(String.Format("# of cities:{0}", cities.Count)) ;
-    }
 
 
 }
