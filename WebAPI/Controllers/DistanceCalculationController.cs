@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace WebAPI.Controllers
 {
@@ -22,7 +23,7 @@ namespace WebAPI.Controllers
         [HttpGet(Name = "CalculateDistanceByZipCodes")]
         public string Get(string zipOrig, string zipDest)
         {
-            return cities.CalculateDistance(zipOrig, zipDest);
+            return JsonSerializer.Serialize(cities.CalculateDistance(zipOrig, zipDest));
         }
     }
 }
