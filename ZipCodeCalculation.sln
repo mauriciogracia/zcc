@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZipCodeCalculation", "Console\ZipCodeCalculation.csproj", "{4FF2D5CA-6AEE-442B-88BB-C6C688DA4D98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZipCodeCalculation", "ZipCodeCalculation\ZipCodeCalculation.csproj", "{4FF2D5CA-6AEE-442B-88BB-C6C688DA4D98}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website", "Website\Website.csproj", "{B9D88D67-7729-48A9-8E51-A2DBE8D5276B}"
 EndProject
