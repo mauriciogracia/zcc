@@ -10,24 +10,31 @@ Console.WriteLine("City DB ready");
 string ?zipOrigin;
 string ?zipDestination;
 string ?continueCalc;
-long n;
+
 do
 {
     Console.WriteLine("Zip Code Distance Calculation");
 
-    do
-    {
-        Console.WriteLine("From:");
-        zipOrigin = Console.ReadLine();
-    } while (string.IsNullOrEmpty(zipOrigin) || !long.TryParse(zipOrigin, out n));
+    zipOrigin = ReadZipCode("From:");
+    zipDestination = ReadZipCode("To:");
 
-    do
-    {
-        Console.WriteLine("To:");
-        zipDestination = Console.ReadLine();
-    } while (string.IsNullOrEmpty(zipDestination) || !long.TryParse(zipOrigin, out n));
 
     Console.WriteLine(cities.CalculateDistance(zipOrigin, zipDestination));
     Console.WriteLine("Continue ?");
     continueCalc = Console.ReadLine();
 } while (!string.IsNullOrEmpty(continueCalc) && continueCalc.ToUpper().Equals("Y"));
+
+
+static string ReadZipCode(string message)
+{
+    string ?zip;
+    long n;
+
+    do
+    {
+        Console.WriteLine(message);
+        zip = Console.ReadLine();
+    } while (string.IsNullOrEmpty(zip) || !long.TryParse(zip, out n));
+
+    return zip;
+}
