@@ -7,7 +7,7 @@ import './App.css';
 function App() {
     const [zipFrom, setOrig] = useState('');
     const [zipDest, setDest] = useState('');
-    //const []
+    const [distanceMessage, setCalc] = useState('');
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -17,18 +17,14 @@ function App() {
         fetch(apiURL).then(res => res.json())
                 .then(
                     (result) => {
-                        console.log(result);
-                        /*this.setState({
-                            employees: result
-                        });
-                        */
+                        setCalc(result);
                     }
                 );
     }
 
     return (
     <div className="App">
-            <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <h3>Zip Code Distanance Calculation - React</h3>
               <label>
                   Zip From:
@@ -42,7 +38,9 @@ function App() {
                         setDest(event.target.value)
                     } />
               </label><br />
-              <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" />
+                <br/>
+                <label>{distanceMessage}</label>
           </form>
     </div>
   );
