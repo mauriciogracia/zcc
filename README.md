@@ -36,13 +36,14 @@ To prepare the Docker image Run these commands from a commandline (CMD, Powershe
 ## How to run Console application
 
 1. Go to the `zcc/ZipCodeCalculation`
-2. `dotnet run`
+1. `dotnet build`
+1. `dotnet run`
    <br />
 
     Running above command show look like this <br />
     <img src="ConsoleSS.png" alt="ZipCodeCalculation console output" style="height: 200px"/>
 
-    The zipcode is validated to check for empty and non numeric values, when the calculation is done you can try another one by pressing `y`
+    The zipcode is validated to check for empty and non numeric values, when the calculation is done you can try another one by pressing `y`<br />
     <img src="ConsoleSS_02.png" alt="ZipCode validation" style="height: 200px"/>
 
 ## How to run Website (react asp.net)
