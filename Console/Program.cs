@@ -1,15 +1,17 @@
 ﻿using System;
 
+
 namespace CoreConsole
 {
+    /// <summary>
+    /// This is  the main console, that uses the ZipCodeCore .NET 2.0 library for the distance calculation
+    /// </summary>
     internal class Program
     {
         static void Main(string[] args)
         {
-            CitiesList cities = new CitiesList();
-
             Console.WriteLine("Connecting to Docker mongoDB...");
-            cities.populateMongoDB("./data/ZipCodes.csv");
+            CitiesList cities = new CitiesList();
             Console.WriteLine("City DB ready");
 
             string zipOrigin;
@@ -30,7 +32,11 @@ namespace CoreConsole
             } while (!string.IsNullOrEmpty(continueCalc) && continueCalc.ToUpper().Equals("Y"));
 
         }
-
+        /// <summary>
+        /// Methods that validates that the entered zipcode is not empty and is numeric
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         static string ReadZipCode(string message)
         {
             long n;

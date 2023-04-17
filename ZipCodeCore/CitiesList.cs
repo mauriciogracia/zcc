@@ -11,12 +11,16 @@ public class CitiesList {
     public IMongoCollection<City> Cities { get; set; }
     MongoClient client = new MongoClient("mongodb://localhost:27017");
 
+
+    public CitiesList() {
+        populateMongoDB("./data/ZipCodes.csv");
+    }
     /// <summary>
     /// Load the CSV into a list of cities
     /// </summary>
     /// <param name="path">Path to the CSV file</param>
     /// <returns></returns>
-    public bool populateMongoDB(string path) {
+    private bool populateMongoDB(string path) {
         bool success = false;
 
         try

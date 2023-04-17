@@ -2,10 +2,9 @@
 
 namespace ZipCodeCalculation
 {
-    //Taken from - https://www.geeksforgeeks.org/program-distance-two-points-earth/
-    // This code is contributed by / Manish Shaw(manishshaw1) to 
     // calculate distance Between Two Points on Earth
-
+    // Taken from - https://www.geeksforgeeks.org/program-distance-two-points-earth/ - is contributed by / Manish Shaw(manishshaw1) to 
+    // The code has been improved by MGG to allow KM and Miles calculation
     class DistanceCalculator
     {
         static double earthRadiusKM = 6371;
