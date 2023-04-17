@@ -1,13 +1,22 @@
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 using System.Text;
 
 /// <summary>
-/// Represents a city data parse from the CSV file
+/// Represents a city data, both from the CSV and the Mongo Collection
 /// </summary>
 public class City {
-    public string zipCode = String.Empty ;
+    [BsonId]
+    public string zipCode = string.Empty ;
+    
+    [BsonElement("latitude")]
     public double latitude ;
+
+    [BsonElement("longitude")]
     public double longitude ;
-    public string name = String.Empty;
+
+    [BsonElement("name")]
+    public string name = string.Empty;
 
 
     /// <summary>
