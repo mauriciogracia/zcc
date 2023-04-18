@@ -14,16 +14,26 @@ namespace WebAPI.Controllers
     {
         CitiesList cities = new CitiesList();
         private readonly ILogger<DistanceCalculationController> _logger;
-
+        bool dockerSuccess = false;
         public DistanceCalculationController(ILogger<DistanceCalculationController> logger)
         {
             _logger = logger;
+            dockerSuccess = cities.prepareMongoDB();
         }
 
         [HttpGet(Name = "CalculateDistanceByZipCodes")]
         public string Get(string zipOrig, string zipDest)
         {
-            return JsonSerializer.Serialize(cities.CalculateDistance(zipOrig, zipDest));
+            string response;
+
+            if(dockerSuccess)
+            {
+                response = cities.CalculateDistance(zipOrig, zipDest);
+            }
+            else {
+                response = "Docker daemon is not running";
+            }
+            return JsonSerializer.Serialize(response);
         }
     }
 }
