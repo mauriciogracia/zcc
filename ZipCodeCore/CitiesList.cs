@@ -117,7 +117,7 @@ public class CitiesList {
     /// <returns></returns>
     public string CalculateDistance(string zipOrig, string zipDest)
     {
-        string resp = "One of the zipcode does not exist in ZipCodes.csv";
+        string resp = "One of the zipcode does not exist in the CITIES database";
         City city1;
         City city2;
 

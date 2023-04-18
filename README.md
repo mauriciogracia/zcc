@@ -19,13 +19,14 @@ This solution has four projects:
 
 ## Requirements
 
-Use the above diagram to determine the framework and runtime versions that you need for each project
+1. Use the above diagram to determine the framework and runtime versions that you need for each project
+1. Make sure the docker dameon is running (Windows run `Docker Desktop`, Linux run `dockerd`)
+   for both the Environment Setup or running the Console or WebSite apps
 
 ## Environment Setup
 
 To prepare the Docker image Run these commands from a commandline (CMD, Powershell, dont use gitbash since step 3 will fail)
 
-1. Make sure the docker dameon is running (Windows run `Docker Desktop`, Linux run `dockerd`)
 1. `docker pull mongo`
 1. `docker run -d -p 27017:27017 --name cities-mdb mongo`
 1. `docker exec -it cities-mdb /bin/bash`
@@ -43,7 +44,7 @@ If you open the ZipCodeCalulation.sln in Visual Studio, you can just click on ST
 
 ## How to run Console application
 
-1. Make sure the docker instance created above is still running
+1. Make sure the docker instance created above is running
 1. Go to the `zcc/Console`
 1. `dotnet build`
 1. `dotnet run`
@@ -61,4 +62,7 @@ If you open the ZipCodeCalulation.sln in Visual Studio, you can just click on ST
 1. Run the `WebAPI` project (from the zcc/WebAPI folder)
 2. Run the `React` web site (from the WebSite folder using Visual Studio or using the command line)
 
-<img src="assets/WebSite.png" alt="ZipCodeCalculation arquitecture diagram" style="height: 200px"/>
+<img src="assets/WebSite.png" alt="React website running" style="height: 200px"/><br /><br />
+If you get this error while running the website<br />
+<img src="assets/React-error.png" alt="Web site error" style="height: 100px"/><br />
+you need to SAVE the file `package.json` to fix it (Visual Studio issue)
