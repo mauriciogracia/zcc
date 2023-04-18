@@ -12,25 +12,34 @@ namespace CoreConsole
         {
             Console.WriteLine("Connecting to Docker mongoDB...");
             CitiesList cities = new CitiesList();
-            Console.WriteLine("City DB ready");
+            bool success = cities.prepareMongoDB();
 
-            string zipOrigin;
-            string zipDestination;
-            string continueCalc;
-
-            do
+            if (success)
             {
-                Console.WriteLine("Zip Code Distance Calculation");
+                Console.WriteLine("City DB ready");
 
-                zipOrigin = ReadZipCode("From:");
-                zipDestination = ReadZipCode("To:");
+                string zipOrigin;
+                string zipDestination;
+                string continueCalc;
+
+                do
+                {
+                    Console.WriteLine("Zip Code Distance Calculation");
+
+                    zipOrigin = ReadZipCode("From:");
+                    zipDestination = ReadZipCode("To:");
 
 
-                Console.WriteLine(cities.CalculateDistance(zipOrigin, zipDestination));
-                Console.WriteLine("Continue (y/n)?");
-                continueCalc = Console.ReadLine();
-            } while (!string.IsNullOrEmpty(continueCalc) && continueCalc.ToUpper().Equals("Y"));
-
+                    Console.WriteLine(cities.CalculateDistance(zipOrigin, zipDestination));
+                    Console.WriteLine("Continue (y/n)?");
+                    continueCalc = Console.ReadLine();
+                } while (!string.IsNullOrEmpty(continueCalc) && continueCalc.ToUpper().Equals("Y"));
+            }
+            else
+            {
+                Console.Error.WriteLine("*****************************************");
+                Console.Error.WriteLine("Unable to connect to docker image, make sure your docker daemon is running");
+            }
         }
         /// <summary>
         /// Methods that validates that the entered zipcode is not empty and is numeric
