@@ -59,10 +59,15 @@ If you open the ZipCodeCalulation.sln in Visual Studio, you can just click on ST
 
 ## How to run Website
 
-1. Run the `WebAPI` project (from the zcc/WebAPI folder)
-2. Run the `React` web site (from the WebSite folder using Visual Studio or using the command line)
+1. Run the `WebAPI` project from the `zcc/WebAPI` folder
+2. Run the `React` web site
 
-<img src="assets/WebSite.png" alt="React website running" style="height: 200px"/><br /><br />
-If you get this error while running the website<br />
-<img src="assets/React-error.png" alt="Web site error" style="height: 100px"/><br />
-you need to SAVE the file `package.json` to fix it (Visual Studio issue)
+    1. run `npm run build` from the `website` folder to createe a deploy package
+    1. run `npm install -g serve`
+    1. run `serve -s build`
+    1. open a web browser at `http://localhost:3000`<br/>
+
+    <img src="assets/WebSite.png" alt="React website running" style="height: 200px"/><br /><br />
+    If you get this error while running the website<br />
+    <img src="assets/React-error.png" alt="Web site error" style="height: 100px"/><br />
+    you need to SAVE the file `package.json` to fix it (Visual Studio issue)
